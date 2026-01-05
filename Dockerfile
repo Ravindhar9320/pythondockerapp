@@ -1,5 +1,11 @@
-FROM python:3.10-slim
+# Dockerfile
+FROM python:3.11-slim
+
 WORKDIR /app
 COPY . .
+
+# Optional if using Flask
+COPY requirements.tx .
 RUN pip install -r requirements.txt
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
+
+CMD ["python", "app.py"]
