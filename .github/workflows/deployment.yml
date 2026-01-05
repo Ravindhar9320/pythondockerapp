@@ -1,4 +1,4 @@
-name: Build and Deploy to Azure App Service
+name: Build and Deploy to Azure Container Apps
 
 on:
   push:
@@ -29,8 +29,10 @@ jobs:
         docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/hello:${{ github.sha }} .
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/hello:${{ github.sha }}
 
-    - name: Deploy to Web App
-      uses: azure/webapps-deploy@v3
+    - name: Deploy to Azure Container Apps
+      uses: azure/container-apps-deploy@v1
       with:
-        app-name: "myhelloworldappname"
-        images: "${{ secrets.REGISTRY_LOGIN_SERVER }}/hello:${{ github.sha }}"
+        acrName: ${{ secrets.REGISTRY_NAME }}
+        containerAppName: "my-container-app-name"
+        resourceGroup: "my-resource-group"
+        imageToDeploy: "${{ secrets.REGISTRY_LOGIN_SERVER }}/hello:${{ github.sha }}"
