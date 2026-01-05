@@ -57,6 +57,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'myhelloworldappname'
+          app-name: 'mycontainerapphelloworld'
           slot-name: 'Production'
           images: 'acrhelloworlddemo.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_07304BF98BAF491B8645C0729B887F83 }}/helloworld:${{ github.sha }}'
+
