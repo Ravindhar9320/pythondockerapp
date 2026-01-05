@@ -33,7 +33,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: acrhelloworlddemo.azurecr.io/helloworld:${{ github.sha }}
+          tags: acrhelloworlddemo.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_07304BF98BAF491B8645C0729B887F83 }}/helloworld:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -59,6 +59,4 @@ jobs:
         with:
           app-name: 'myhelloworldappname'
           slot-name: 'Production'
-          images: 'acrhelloworlddemo.azurecr.io/helloworld:${{ github.sha }}'
-
-          
+          images: 'acrhelloworlddemo.azurecr.io/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_07304BF98BAF491B8645C0729B887F83 }}/helloworld:${{ github.sha }}'
