@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 # Optional if using Flask
-COPY requirements.tx .
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 CMD ["python", "app.py"]
