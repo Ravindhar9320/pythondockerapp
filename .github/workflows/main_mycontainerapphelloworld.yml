@@ -40,10 +40,13 @@ jobs:
 
     - name: Push Docker image to ACR
       run: |
-        docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:latest
+           docker login acrhelloworlddemo.azurecr.io -u acrhelloworlddemo -p ersFY9551ZwXSMmVWN+rxiUE0W3mmWMSPbs1Il/Cw/+ACRCABcQY
+           docker tag hello-world $ACR_NAME.azurecr.io/$IMAGE_NAME
+           docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:latest
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.WEBAPP_NAME }}
         images: ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+
