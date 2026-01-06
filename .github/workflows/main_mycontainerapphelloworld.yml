@@ -19,7 +19,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      - name: Clear Docker credentials
+        run: docker logout
       # Login to Azure using service principal
       - name: Azure Login
         uses: azure/login@v2
@@ -50,5 +51,6 @@ jobs:
         with:
           app-name: ${{ env.WEBAPP_NAME }}
           images: ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+
 
 
