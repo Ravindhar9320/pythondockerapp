@@ -27,10 +27,12 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Login to ACR using Azure identity
+    - name: Login to ACR
       uses: azure/docker-login@v2
       with:
         login-server: ${{ env.ACR_NAME }}.azurecr.io
+        username: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }} 
+        password: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}
 
     - name: Build Docker image
       run: docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME:latest .
@@ -43,4 +45,5 @@ jobs:
       with:
         app-name: ${{ env.WEBAPP_NAME }}
         images: ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+
 
