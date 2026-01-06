@@ -30,7 +30,7 @@ jobs:
       - name: Login to ACR
         uses: azure/docker-login@v2
         with:
-          registry: ${{ env.ACR_NAME }}.azurecr.io
+          login-server: ${{ env.ACR_NAME }}.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
@@ -50,4 +50,5 @@ jobs:
         with:
           app-name: ${{ env.WEBAPP_NAME }}
           images: ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+
 
